@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Team Chat</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <h2 class="app-title">Team Chat</h2>
+        <nav class="channel-list">
+        </nav>
+      </aside>
+
+      <!-- Chat panel -->
+      <main class="chat-panel">
+        <header class="chat-header">
+          <h3 id="channel-title">General</h3>
+        </header>
+
+        <section class="chat-messages" id="chat-messages">
+          <div class="message">
+            <span class="sender">Alex:</span>
+            <span class="text">Morning team! Ready to get started?</span>
+          </div>
+          <div class="message self">
+            <span class="sender">You:</span>
+            <span class="text">All set! Let’s do it.</span>
+          </div>
+        </section>
+
+        <div class="chat-input" id="chat-form">
+          <input
+            id="message-input"
+            type="text"
+            placeholder="Type your message..."
+            autocomplete="off"
+          />
+          <button>Send</button>
+        </div>
+      </main>
+    </div>
+
+    <template>
+      <div class="message">
+        <span class="sender">Alex:</span>
+        <span class="text">Morning team! Ready to get started?</span>
+      </div>
+    </template>
+    <script src="script.js"></script>
+  </body>
+</html>
