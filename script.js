@@ -9,7 +9,20 @@ async function init() {
       btn.classList.add("channel");
       btn.dataset.channel = channel.id;
       btn.innerText = channel.name;
-      btn.addEventListener("click", () => populateMessages(channel.id));
+
+      // load messages for channel
+      btn.addEventListener("click", () => {
+        // mark this one as active (for styling)
+        document.querySelectorAll(".channel").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        // update header title
+        document.getElementById("channel-title").innerText = channel.name;
+
+        // show messages
+        populateMessages(channel.id);
+      });
+
       channelList.appendChild(btn);
     });
   } catch (err) {
@@ -19,7 +32,7 @@ async function init() {
 
 async function populateMessages(chat) {
   try {
-    const messageArea = document.querySelector(".messages");
+    const messageArea = document.querySelector(".chat-messages");
     messageArea.innerHTML = "";
 
     const res = await fetch(`https://slackclonebackendapi.onrender.com/messages?channelId=${chat}`);
@@ -31,7 +44,8 @@ async function populateMessages(chat) {
       const sender = user[0]?.name || "Unknown";
 
       const div = document.createElement("div");
-      div.innerHTML = `<strong>${sender}:</strong> ${msg.text}`;
+      div.classList.add("message");
+      div.innerHTML = `<span class="sender">${sender}:</span> <span class="text">${msg.text}</span>`;
       messageArea.appendChild(div);
     }
   } catch (err) {
@@ -40,8 +54,8 @@ async function populateMessages(chat) {
 }
 
 // extra credit: send a new message
-const sendBtn = document.querySelector(".send-btn");
-const input = document.querySelector(".message-input");
+const sendBtn = document.querySelector(".chat-input button");
+const input = document.getElementById("message-input");
 
 if (sendBtn && input) {
   sendBtn.addEventListener("click", async () => {
